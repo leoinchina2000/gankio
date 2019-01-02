@@ -16,6 +16,7 @@ import rx.subscriptions.CompositeSubscription
 /**
  * Activity基类，所有Activity应该继承此类
  *
+ * a test
  */
 
 abstract class BaseActivity : AppCompatActivity(), BGASwipeBackHelper.Delegate {
