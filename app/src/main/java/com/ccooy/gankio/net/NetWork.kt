@@ -1,5 +1,6 @@
 package com.ccooy.gankio.net
 
+import com.ccooy.gankio.config.GlobalConfig
 import com.ccooy.gankio.net.api.GankApi
 
 import okhttp3.OkHttpClient
@@ -21,7 +22,7 @@ object NetWork {
         if (gankApi == null) {
             val retrofit = Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("http://gank.io/api/")
+                    .baseUrl(GlobalConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build()

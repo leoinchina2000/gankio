@@ -1,5 +1,6 @@
 package com.ccooy.gankio.module.home
 
+import com.ccooy.gankio.config.GlobalConfig
 import com.ccooy.gankio.model.CategoryResult
 import com.ccooy.gankio.model.PictureModel
 import com.ccooy.gankio.model.ResultsBean
@@ -40,7 +41,7 @@ class HomePresenter internal constructor(private val mHomeView: IHomeView) : IHo
 
     override fun getBannerData() {
         mSubscription = NetWork.getGankApi()
-                .getCategoryData("福利", 5, 1)
+                .getCategoryData(GlobalConfig.CATEGORY_NAME_FULI, 5, 1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<CategoryResult> {

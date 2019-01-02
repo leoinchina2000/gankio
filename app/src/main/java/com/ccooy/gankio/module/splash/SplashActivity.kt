@@ -34,13 +34,13 @@ class SplashActivity : BaseActivity() {
         val i = Random().nextInt(ConstantsImageUrl.TRANSITION_URLS.size)
         // 先显示默认图
 
-        splash_iv_defult_pic.setImageDrawable(resources.getDrawable(R.drawable.img_transition_default))
+//        splash_iv_defult_pic.setImageDrawable(resources.getDrawable(R.drawable.img_transition_default))
         Glide.with(this)
                 .load(ConstantsImageUrl.TRANSITION_URLS[i])
                 .placeholder(R.drawable.img_transition_default)
                 .error(R.drawable.img_transition_default)
                 .into(splash_iv_pic)
-        Handler().postDelayed({ splash_iv_defult_pic.visibility = View.GONE }, 1500)
+//        Handler().postDelayed({ splash_iv_defult_pic.visibility = View.GONE }, 1500)
 
         Handler().postDelayed({ toMainActivity() }, 3500)
         splash_tv_jump.setOnClickListener { toMainActivity() }
