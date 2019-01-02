@@ -18,10 +18,6 @@ import kotlinx.android.synthetic.main.fragment_category.view.*
 /**
  * 主页轮播下面的Fragment
  *
- *
- * Author:
- *
- * Date: 2017-04-14  9:46
  */
 
 class CategoryFragment : BaseFragment(), ICategoryView, OnRefreshListener, OnLoadMoreListener {

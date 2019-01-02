@@ -4,12 +4,6 @@ import android.annotation.SuppressLint
 import java.text.ParseException
 import java.text.SimpleDateFormat
 
-/**
- * Author:
- *
- * Date: 2017-04-14  10:48
- */
-
 object TimeUtil {
 
     fun dateFormat(timestamp: String?): String {

@@ -2,12 +2,6 @@ package com.ccooy.gankio
 
 import android.content.Context
 
-/**
- * Author:
- *
- * Date: 2017-04-14  10:41
- */
-
 object ConfigManage {
 
     private const val spName = "app_config"

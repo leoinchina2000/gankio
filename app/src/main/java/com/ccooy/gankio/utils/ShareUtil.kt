@@ -9,9 +9,6 @@ import com.ccooy.gankio.R
 /**
  * 专用于分享的工具类
  *
- * Author:
- *
- * Date: 2017-04-20  11:56
  */
 
 object ShareUtil {

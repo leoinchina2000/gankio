@@ -30,10 +30,6 @@ import kotlinx.android.synthetic.main.activity_picture.*
 /**
  * 大图页面
  *
- *
- * Author:
- *
- * Date: 2017-04-24  10:11
  */
 class PictureActivity : BaseActivity(), PictureView {
     private var mBitmap: Bitmap? = null

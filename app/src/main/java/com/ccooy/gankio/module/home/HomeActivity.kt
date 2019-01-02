@@ -39,10 +39,6 @@ import kotlinx.android.synthetic.main.layout_main_nav.view.*
 /**
  * 主页面
  *
- *
- * Author:
- *
- * Date: 2017-04-07  15:31
  */
 
 class HomeActivity : BaseActivity(), IHomeView, OnBannerListener {

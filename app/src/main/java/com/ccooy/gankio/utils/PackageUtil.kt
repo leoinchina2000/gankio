@@ -6,9 +6,6 @@ import android.content.pm.PackageManager
 /**
  * 包相关工具类
  *
- * Author:
- *
- * Date: 2017-04-20  17:22
  */
 
 object PackageUtil {

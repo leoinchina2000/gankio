@@ -16,9 +16,6 @@ import rx.subscriptions.CompositeSubscription
 /**
  * Activity基类，所有Activity应该继承此类
  *
- * Author:
- *
- * Date: 2017-04-07  14:33
  */
 
 abstract class BaseActivity : AppCompatActivity(), BGASwipeBackHelper.Delegate {

@@ -9,10 +9,6 @@ import java.util.*
  * 单IP每秒限制请求次数10次，大于10次403禁止5秒。
  * 单url限速8Mbps，下载到10MB之后，限速1Mbps。
  *
- *
- * Author:
- *
- * Date: 2017-04-07  15:06
  */
 
 object ConstantsImageUrl {

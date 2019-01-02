@@ -17,12 +17,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-/**
- * Author:
- *
- * Date: 2017-04-24  14:31
- */
-
 class PicturePresenter(private val mContext: Context) : Presenter {
 
     override fun subscribe() {

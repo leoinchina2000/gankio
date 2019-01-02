@@ -5,12 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 
-/**
- * Author:
- *
- * Date: 2017-04-19  9:38
- */
-
 class Utils private constructor() {
 
     init {

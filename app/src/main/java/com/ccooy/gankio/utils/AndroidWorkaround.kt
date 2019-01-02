@@ -6,12 +6,6 @@ import android.graphics.Rect
 import android.view.View
 import android.view.ViewGroup
 
-/**
- * Author:
- *
- * Date: 2018-01-19  17:26
- */
-
 class AndroidWorkaround private constructor(private val mChildOfContent: View) {
     private var usableHeightPrevious: Int = 0
     private val frameLayoutParams: ViewGroup.LayoutParams

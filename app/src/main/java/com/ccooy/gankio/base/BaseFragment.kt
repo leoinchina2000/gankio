@@ -9,12 +9,6 @@ import android.view.ViewGroup
 import butterknife.ButterKnife
 import butterknife.Unbinder
 
-/**
- * Author:
- *
- * Date: 2017-04-14  9:47
- */
-
 abstract class BaseFragment : Fragment() {
 
     private lateinit var unbinder: Unbinder

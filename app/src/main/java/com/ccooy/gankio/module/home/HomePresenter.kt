@@ -12,12 +12,6 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.util.*
 
-/**
- * Author:
- *
- * Date: 2017-04-14  12:31
- */
-
 class HomePresenter internal constructor(private val mHomeView: IHomeView) : IHomePresenter {
 
     private var mSubscription: Subscription? = null

@@ -2,12 +2,6 @@ package com.ccooy.gankio.base.adapter;
 
 import android.view.View;
 
-/**
- * Author:
- *
- * Date: 2017-04-07  16:31
- */
-
 public class ListenerWithPosition implements View.OnClickListener {
 
     private int mPosition;

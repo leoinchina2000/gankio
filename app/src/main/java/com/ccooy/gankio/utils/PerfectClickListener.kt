@@ -4,12 +4,6 @@ import android.view.View
 import android.view.View.OnClickListener
 import java.util.*
 
-/**
- * Author:
- *
- * Date: 2017-04-20  10:54
- */
-
 abstract class PerfectClickListener : OnClickListener {
     private var lastClickTime: Long = 0
     private var id = -1

@@ -14,10 +14,6 @@ import kotlinx.android.synthetic.main.activity_nav_home.*
 /**
  * 项目主页面
  *
- *
- * Author:
- *
- * Date: 2017-04-20  10:10
  */
 class NavHomeActivity : BaseActivity() {
 

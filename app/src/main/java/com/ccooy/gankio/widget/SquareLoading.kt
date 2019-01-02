@@ -13,12 +13,6 @@ import android.widget.ImageView
 import com.ccooy.gankio.R
 import java.util.*
 
-/**
- * Author:
- *
- * Date: 2017-04-07  16:48
- */
-
 class SquareLoading : ViewGroup {
 
 

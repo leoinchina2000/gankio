@@ -11,9 +11,6 @@ import android.view.View
 /**
  * RecyclerView的分割线
  *
- * Author:
- *
- * Date: 2017-04-07  16:47
  */
 
 class RecyclerViewDivider

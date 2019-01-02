@@ -11,10 +11,6 @@ import rx.schedulers.Schedulers
 /**
  * ICategoryPresenter
  *
- *
- * Author:
- *
- * Date: 2017-04-14  11:16
  */
 
 class CategoryPresenter(

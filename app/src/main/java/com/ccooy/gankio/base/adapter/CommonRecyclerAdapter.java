@@ -12,9 +12,6 @@ import java.util.List;
 /**
  * 通用的RecyclerView基类
  *
- * Author:
- *
- * Date: 2017-04-07  16:31
  */
 
 public abstract class CommonRecyclerAdapter<T> extends RecyclerView.Adapter {

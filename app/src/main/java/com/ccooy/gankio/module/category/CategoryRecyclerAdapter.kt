@@ -14,12 +14,6 @@ import com.ccooy.gankio.model.ResultsBean
 import com.ccooy.gankio.module.web.WebViewActivity
 import com.ccooy.gankio.utils.TimeUtil
 
-/**
- * Author:
- *
- * Date: 2017-04-14  10:21
- */
-
 class CategoryRecyclerAdapter(context: Context)
     : CommonRecyclerAdapter<ResultsBean>(context, null, R.layout.item_category),
         ListenerWithPosition.OnClickWithPositionListener<CommonRecyclerHolder> {

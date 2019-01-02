@@ -18,9 +18,6 @@ import com.ccooy.gankio.R
 /**
  * 状态栏设置工具类
  *
- * Author:
- *
- * Date: 2017-04-07  14:30
  */
 
 object StatusBarUtil {

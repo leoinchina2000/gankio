@@ -10,9 +10,6 @@ import rx.Observable
  *
  * 代码家的gank.io接口
  *
- * Author:
- *
- * Date: 2017-04-14  11:23
  */
 
 interface GankApi {

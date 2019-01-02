@@ -4,13 +4,6 @@ import com.ccooy.gankio.base.BasePresenter
 import com.ccooy.gankio.base.BaseView
 import com.ccooy.gankio.model.ResultsBean
 
-/**
- * Author:
- *
- * Date: 2017-04-14  10:14
- */
-
-
 interface ICategoryView : BaseView {
 
     val categoryName: String

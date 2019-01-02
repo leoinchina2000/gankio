@@ -3,12 +3,6 @@ package com.ccooy.gankio.utils
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 
-/**
- * Author:
- *
- * Date: 2017-04-25  14:03
- */
-
 object ResourceHelper {
 
     val resource: Resources

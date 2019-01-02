@@ -13,9 +13,6 @@ import java.net.URISyntaxException
 /**
  * 一个轻量的支付宝转账工具类
  *
- * Author:
- *
- * Date: 2017-04-20  15:54
  */
 
 object AlipayZeroSdk {

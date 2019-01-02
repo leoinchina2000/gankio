@@ -9,9 +9,6 @@ import com.ccooy.gankio.R
 /**
  * Dialog父类
  *
- * Author:
- *
- * Date: 2017-04-07  16:28
  */
 
 abstract class BaseDialog

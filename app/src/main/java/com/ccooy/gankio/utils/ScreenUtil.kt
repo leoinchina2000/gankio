@@ -8,13 +8,6 @@ import android.view.WindowManager
 
 import java.lang.reflect.Field
 
-
-/**
- * Author:
- *
- * Date: 2017-04-19  9:37
- */
-
 object ScreenUtil {
     // 获取屏幕的宽度
     val screenWidth: Int

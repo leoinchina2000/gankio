@@ -4,12 +4,6 @@ import android.widget.Toast
 
 import es.dmoral.toasty.Toasty
 
-/**
- * Author:
- *
- * Date: 2017-04-24  15:33
- */
-
 object ToastyUtil {
 
     fun showError(msg: String) {

@@ -17,10 +17,6 @@ import kotlinx.android.synthetic.main.activity_nav_deed_back.*
 /**
  * 问题反馈页面
  *
- *
- * Author:
- *
- * Date: 2017-04-20  10:10
  */
 class NavDeedBackActivity : BaseActivity() {
 

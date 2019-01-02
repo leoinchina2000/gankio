@@ -10,9 +10,6 @@ import android.widget.TextView;
 /**
  * 通用的RecyclerView的Holder
  *
- * Author:
- *
- * Date: 2017-04-07  16:30
  */
 
 public class CommonRecyclerHolder extends RecyclerView.ViewHolder {

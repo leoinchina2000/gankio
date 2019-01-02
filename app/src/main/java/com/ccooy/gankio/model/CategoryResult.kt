@@ -2,10 +2,6 @@ package com.ccooy.gankio.model
 
 /**
  * Category 返回model
- *
- * Author:
- *
- * Date: 2017-04-14  10:17
  */
 
 data class CategoryResult(

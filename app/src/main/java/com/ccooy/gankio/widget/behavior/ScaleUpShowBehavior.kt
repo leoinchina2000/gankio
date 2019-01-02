@@ -10,12 +10,6 @@ import android.view.View
 
 import com.ccooy.gankio.utils.AnimatorUtil
 
-/**
- * Author:
- *
- * Date: 2017-04-14  15:21
- */
-
 class ScaleUpShowBehavior(context: Context, attrs: AttributeSet) : FloatingActionButton.Behavior() {
 
     private var isAnimatingOut = false

@@ -17,9 +17,6 @@ import java.util.*
 /**
  * 闪屏页面
  *
- * Author:
- *
- * Date: 2017-04-07  14:59
  */
 
 class SplashActivity : BaseActivity() {

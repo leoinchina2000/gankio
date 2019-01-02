@@ -3,9 +3,6 @@ package com.ccooy.gankio.config
 /**
  * 全局配置
  *
- * Author:
- *
- * Date: 2017-04-14  9:43
  */
 
 object GlobalConfig {

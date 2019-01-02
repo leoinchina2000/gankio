@@ -15,9 +15,6 @@ import java.util.*
 /**
  * 获取原生资源工具类
  *
- * Author:
- *
- * Date: 2017-04-07  15:09
  */
 
 class CommonUtil {

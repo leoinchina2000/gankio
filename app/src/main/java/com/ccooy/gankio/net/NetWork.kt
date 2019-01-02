@@ -10,9 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * 网络操作类
  *
- * Author:
- *
- * Date: 2017-04-14  11:21
  */
 
 object NetWork {

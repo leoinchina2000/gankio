@@ -8,9 +8,6 @@ import com.ccooy.gankio.base.BaseView
 /**
  * WebContract
  *
- * Author:
- *
- * Date: 2017-04-14  14:38
  */
 
 interface WebContract {

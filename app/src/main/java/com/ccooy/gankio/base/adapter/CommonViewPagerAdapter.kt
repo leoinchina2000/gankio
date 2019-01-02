@@ -8,9 +8,6 @@ import java.util.*
 /**
  * ViewPager通用
  *
- * Author:
- *
- * Date: 2017-04-07  16:29
  */
 
 class CommonViewPagerAdapter(fm: FragmentManager, private val title: Array<String>) : FragmentPagerAdapter(fm) {
