@@ -7,15 +7,14 @@ import com.ccooy.gankio.model.ResultsBean
 import com.ccooy.gankio.module.home.HomeContract.IHomePresenter
 import com.ccooy.gankio.module.home.HomeContract.IHomeView
 import com.ccooy.gankio.net.NetWork
-import rx.Observer
-import rx.Subscription
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import java.util.*
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 class HomePresenter internal constructor(private val mHomeView: IHomeView) : IHomePresenter {
 
-    private var mSubscription: Subscription? = null
+    private var mDisposable: Disposable? = null
 
     private val mModels: MutableList<PictureModel>
 
@@ -31,43 +30,47 @@ class HomePresenter internal constructor(private val mHomeView: IHomeView) : IHo
     }
 
     override fun unSubscribe() {
-        mSubscription?.let {
-            if (!mSubscription!!.isUnsubscribed) {
-                mSubscription!!.unsubscribe()
+        mDisposable?.let {
+            if (!mDisposable!!.isDisposed) {
+                mDisposable!!.dispose()
             }
         }
 
     }
 
     override fun getBannerData() {
-        mSubscription = NetWork.getGankApi()
-                .getCategoryData(GlobalConfig.CATEGORY_NAME_FULI, 5, 1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<CategoryResult> {
-                    override fun onCompleted() {
+        val observer: Observer<CategoryResult> = object : Observer<CategoryResult> {
+            override fun onComplete() {
+            }
 
-                    }
+            override fun onSubscribe(d: Disposable) {
+                mDisposable = d
+            }
 
-                    override fun onError(e: Throwable) {
-                        mHomeView.showBannerFail("Banner 图加载失败")
-                    }
+            override fun onError(e: Throwable) {
+                mHomeView.showBannerFail("Banner 图加载失败")
+            }
 
-                    override fun onNext(categoryResult: CategoryResult?) {
-                        if (categoryResult != null && !categoryResult.results.isEmpty()) {
-                            val imgUrls = ArrayList<String>()
-                            for (result: ResultsBean in categoryResult.results) {
-                                if (!result.url.isEmpty()) {
-                                    imgUrls.add(result.url)
-                                }
-                                mModels.add(PictureModel(if (result.desc.isEmpty()) "unknown" else result.desc, result.url))
-                            }
-                            mHomeView.setBanner(imgUrls)
-                        } else {
-                            mHomeView.showBannerFail("Banner 图加载失败")
+            override fun onNext(categoryResult: CategoryResult) {
+                if (categoryResult != null && !categoryResult.results.isEmpty()) {
+                    val imgUrls = ArrayList<String>()
+                    for (result: ResultsBean in categoryResult.results) {
+                        if (!result.url.isEmpty()) {
+                            imgUrls.add(result.url)
                         }
+                        mModels.add(PictureModel(if (result.desc.isEmpty()) "unknown" else result.desc, result.url))
                     }
-                })
+                    mHomeView.setBanner(imgUrls)
+                } else {
+                    mHomeView.showBannerFail("Banner 图加载失败")
+                }
+            }
+        }
+        NetWork.getGankApi()
+            .getCategoryData(GlobalConfig.CATEGORY_NAME_FULI, 5, 1)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(observer)
     }
 
 }

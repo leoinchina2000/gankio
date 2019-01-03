@@ -10,8 +10,11 @@ import butterknife.ButterKnife
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper
 import com.ccooy.gankio.R
 import com.ccooy.gankio.utils.StatusBarUtil
-import rx.Subscription
-import rx.subscriptions.CompositeSubscription
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+
+//import rx.Subscription
+//import rx.subscriptions.CompositeSubscription
 
 /**
  * Activity基类，所有Activity应该继承此类
@@ -20,7 +23,7 @@ import rx.subscriptions.CompositeSubscription
 
 abstract class BaseActivity : AppCompatActivity(), BGASwipeBackHelper.Delegate {
 
-    private var mCompositeSubscription: CompositeSubscription? = null
+    private var mCompositeSubscription: CompositeDisposable? = null
 
     private lateinit var mSwipeBackHelper: BGASwipeBackHelper
 
@@ -31,7 +34,7 @@ abstract class BaseActivity : AppCompatActivity(), BGASwipeBackHelper.Delegate {
      */
     protected abstract val contentViewLayoutID: Int
 
-    val compositeSubscription: CompositeSubscription?
+    val compositeSubscription: CompositeDisposable?
         get() {
             checkSubscription()
             return this.mCompositeSubscription
@@ -60,14 +63,14 @@ abstract class BaseActivity : AppCompatActivity(), BGASwipeBackHelper.Delegate {
      */
     private fun checkSubscription() {
         if (this.mCompositeSubscription == null) {
-            this.mCompositeSubscription = CompositeSubscription()
+            this.mCompositeSubscription = CompositeDisposable()
         }
     }
 
     /**
      * 增加一个调度器
      */
-    protected fun addSubscription(s: Subscription) {
+    protected fun addSubscription(s: Disposable) {
         checkSubscription()
         this.mCompositeSubscription!!.add(s)
     }
@@ -87,8 +90,8 @@ abstract class BaseActivity : AppCompatActivity(), BGASwipeBackHelper.Delegate {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (this.mCompositeSubscription != null && !this.mCompositeSubscription!!.isUnsubscribed) {
-            this.mCompositeSubscription!!.unsubscribe()
+        if (this.mCompositeSubscription != null && !this.mCompositeSubscription!!.isDisposed) {
+            this.mCompositeSubscription!!.dispose()
         }
     }
 
