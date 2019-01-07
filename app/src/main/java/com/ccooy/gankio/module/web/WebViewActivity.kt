@@ -14,7 +14,7 @@ import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.ccooy.gankio.R
-import com.ccooy.gankio.base.BaseActivity
+import com.ccooy.gankio.module.base.BaseActivity
 import com.ccooy.gankio.module.web.WebContract.IWebPresenter
 import com.ccooy.gankio.module.web.WebContract.IWebView
 import kotlinx.android.synthetic.main.activity_web_view.*

@@ -7,9 +7,9 @@
     <color name="blue">#2F98E9</color>
     <color name="white">#ffffffff</color>
     <color name="main_white">#f2f4f5</color>
-    <color name="colorTabTextUnSelected">#D3D3D2</color>
-    <color name="colorTabTextSelected">#FDFDFD</color>
-    <color name="colorTabIndicator">#FDFDFD</color>
+    <color name="colorTabTextUnSelected">#AAAAAA</color>
+    <color name="colorTabTextSelected">#2F98E9</color>
+    <color name="colorTabIndicator">#2F98E9</color>
     <!--页面背景的颜色-->
     <color name="colorPageBg">#f2f4f5</color>
     <!--item的5.0一下版本选择器颜色-->
@@ -31,4 +31,6 @@
     <!--首页item文字颜色-->
     <color name="colorSubtitle">#999</color>
     <color name="black">#000</color>
+    <color name="dark_grey">#222222</color>
+    <color name="grey">#444444</color>
 </resources>

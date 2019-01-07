@@ -7,8 +7,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.ccooy.gankio.App
 import com.ccooy.gankio.R
-import com.ccooy.gankio.base.BaseFragment
 import com.ccooy.gankio.model.ResultsBean
+import com.ccooy.gankio.module.base.BaseFragment
 import com.ccooy.gankio.widget.RecyclerViewDivider
 import com.ccooy.gankio.widget.RecyclerViewWithFooter.OnLoadMoreListener
 import com.ccooy.gankio.widget.RecyclerViewWithFooter.RecyclerViewWithFooter

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
@@ -19,7 +20,7 @@ import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
 import com.github.chrisbanes.photoview.PhotoView
 import com.ccooy.gankio.R
-import com.ccooy.gankio.base.BaseActivity
+import com.ccooy.gankio.module.base.BaseActivity
 import com.ccooy.gankio.module.picture.PictureContract.PictureView
 import com.ccooy.gankio.module.picture.PictureContract.Presenter
 import com.ccooy.gankio.utils.Utils
@@ -56,6 +57,7 @@ class PictureActivity : BaseActivity(), PictureView {
     override fun initView(savedInstanceState: Bundle?) {
         mToolbar = picture_toolbar
         mImgView = picture_img
+        mImgView.background = ColorDrawable(this.resources.getColor(R.color.dark_grey))
         mProgressBar = picture_progress
         mSaveBtn = picture_btn_save
 
@@ -65,6 +67,7 @@ class PictureActivity : BaseActivity(), PictureView {
 
         mToolbar.title = if (TextUtils.isEmpty(mImageTitle)) "图片预览" else mImageTitle
         mToolbar.setNavigationOnClickListener { finish() }
+        mToolbar.setTitleTextColor(resources.getColor(R.color.white))
         setSupportActionBar(mToolbar)
         supportActionBar?.hide()
 
@@ -72,20 +75,20 @@ class PictureActivity : BaseActivity(), PictureView {
             override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
                 hideProgress()
                 mBitmap = resource
-                if (resource != null){
+                if (resource != null) {
                     mSaveBtn.visibility = View.VISIBLE
                     mImgView.setImageBitmap(resource)
-                }else{
+                } else {
                     mSaveBtn.visibility = View.GONE
                 }
             }
         }
 
         Glide.with(Utils.getContext())
-                .load(mImageUrl)
-                .asBitmap()
-                .dontAnimate()
-                .into(target)
+            .load(mImageUrl)
+            .asBitmap()
+            .dontAnimate()
+            .into(target)
 
     }
 
@@ -137,8 +140,7 @@ class PictureActivity : BaseActivity(), PictureView {
             val intent = Intent(context, PictureActivity::class.java)
             intent.putExtra(EXTRA_IMAGE_URL, url)
             intent.putExtra(EXTRA_IMAGE_TITLE, desc)
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    context, banner, TRANSIT_PIC)//与xml文件对应
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, banner, TRANSIT_PIC)//与xml文件对应
             ActivityCompat.startActivity(context, intent, options.toBundle())
         }
     }

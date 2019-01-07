@@ -1,7 +1,6 @@
 package com.ccooy.gankio.module.web
 
 import android.app.Activity
-
 import com.ccooy.gankio.base.BasePresenter
 import com.ccooy.gankio.base.BaseView
 

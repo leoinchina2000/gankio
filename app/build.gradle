@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
@@ -47,12 +49,13 @@ dependencies {
 //    implementation 'io.reactivex:rxandroid:1.2.1'
 
     implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
     // ui
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
     implementation 'cn.bingoogolapple:bga-swipebacklayout:1.0.8'
     implementation 'com.github.Andy671:Dachshund-Tab-Layout:v0.3.0'
     implementation 'com.github.glomadrian:grav:1@aar'

@@ -49,9 +49,9 @@ class CategoryRecyclerAdapter(context: Context)
 //            holder.setTextViewText(R.id.category_item_src, if (TextUtils.isEmpty(resultsBean.source)) "unknown" else resultsBean.source)
 
             // 上面的代码可以改写为这样：
-            holder.setTextViewText(R.id.category_item_desc, if (resultsBean.desc.isEmpty()) "unknown" else resultsBean.desc)
-            holder.setTextViewText(R.id.category_item_author, if (resultsBean.who.isNotEmpty()) resultsBean.who else "unknown")
-            holder.setTextViewText(R.id.category_item_src, if (resultsBean.source.isNotEmpty()) resultsBean.source else "unknown")
+            holder.setTextViewText(R.id.category_item_desc, if (resultsBean.desc == null || resultsBean.desc.isEmpty()) "unknown" else resultsBean.desc)
+            holder.setTextViewText(R.id.category_item_author, if (resultsBean.who == null || resultsBean.who.isEmpty()) "unknown" else resultsBean.who)
+            holder.setTextViewText(R.id.category_item_src, if (resultsBean.source == null || resultsBean.source.isEmpty()) "unknown" else resultsBean.source)
             holder.setTextViewText(R.id.category_item_time, TimeUtil.dateFormat(resultsBean.publishedAt))
             holder.setOnClickListener(this, R.id.category_item_layout)
         }

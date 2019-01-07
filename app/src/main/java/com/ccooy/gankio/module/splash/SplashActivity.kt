@@ -2,14 +2,13 @@ package com.ccooy.gankio.module.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.widget.TextView
 import butterknife.BindView
 import com.bumptech.glide.Glide
 import com.ccooy.gankio.R
-import com.ccooy.gankio.base.BaseActivity
 import com.ccooy.gankio.config.ConstantsImageUrl
-import com.ccooy.gankio.module.home.HomeActivity
+import com.ccooy.gankio.module.base.BaseActivity
+import com.ccooy.gankio.module.home.MainActivity
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -27,7 +26,7 @@ class SplashActivity : BaseActivity() {
     private var isIn: Boolean = false
 
     @BindView(R.id.splash_tv_jump)
-    private lateinit var mTvJump: TextView
+    public lateinit var mTvJump: TextView
 
     override val contentViewLayoutID: Int
         get() = R.layout.activity_splash
@@ -50,25 +49,19 @@ class SplashActivity : BaseActivity() {
             }
 
             override fun onNext(aLong: Long) {
-              splash_tv_jump.text= getString(R.string.jump) + "(" + (3 - aLong) + "s)"
+              splash_tv_jump.text= getString(R.string.jump) + "(" + (2 - aLong) + "s)"
             }
 
             override fun onError(e: Throwable) {
-                println("Error Occured ${e.message}")
             }
 
             override fun onSubscribe(d: Disposable) {
-                println("New Subscription ")
             }
         }
         Observable.interval(1, TimeUnit.SECONDS).take(3)
             .observeOn(AndroidSchedulers.mainThread()).subscribe(observer)
 
         splash_tv_jump.setOnClickListener { toMainActivity() }
-    }
-
-    override fun isSupportSwipeBack(): Boolean {
-        return false
     }
 
     /**
@@ -78,7 +71,7 @@ class SplashActivity : BaseActivity() {
         if (isIn) {
             return
         }
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out)
         finish()

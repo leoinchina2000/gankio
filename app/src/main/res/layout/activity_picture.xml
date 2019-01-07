@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/dark_grey"
     tools:context="com.ccooy.gankio.module.picture.PictureActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:id="@+id/picture_toolbar"
-            android:background="@color/blue"
+            android:background="@color/dark_grey"
             app:navigationIcon="@mipmap/icon_back"
             app:title="关于Gank"/>
 
@@ -38,8 +38,8 @@
         android:contentDescription="@null"/>
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:background="@drawable/btn_image_save"
         android:layout_marginBottom="30dp"
         android:id="@+id/picture_btn_save"

@@ -1,7 +1,6 @@
 package com.ccooy.gankio.module.picture
 
 import android.graphics.Bitmap
-
 import com.ccooy.gankio.base.BasePresenter
 import com.ccooy.gankio.base.BaseView
 

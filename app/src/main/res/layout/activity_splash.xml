@@ -25,7 +25,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/shape_jump"
         android:gravity="center"
-        android:text="@string/jump"
+        android:text="@string/jump_default"
         android:textColor="#fff"
         android:textSize="16sp"/>
 

@@ -20,7 +20,7 @@ class InternalOkHttpClient {
                     .build()
 
                 if (BuildConfig.DEBUG) {//printf logs while  debug
-                    okHttpClient = okHttpClient?.newBuilder()?.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))?.build()
+                    okHttpClient = okHttpClient?.newBuilder()?.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))?.build()
                 }
             }
             return okHttpClient!!
