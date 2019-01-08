@@ -1,7 +1,6 @@
-package com.ccooy.gankio.module.category
+package com.ccooy.gankio.module.fuli
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -11,10 +10,10 @@ import com.ccooy.gankio.module.base.adapter.CommonRecyclerAdapter
 import com.ccooy.gankio.module.base.adapter.CommonRecyclerHolder
 import com.ccooy.gankio.module.base.adapter.ListenerWithPosition
 import com.ccooy.gankio.model.ResultsBean
-import com.ccooy.gankio.module.web.WebViewActivity
+import com.ccooy.gankio.module.picture.PictureActivity
 import com.ccooy.gankio.utils.TimeUtil
 
-class CategoryRecyclerAdapter(context: Context)
+class FuliRecyclerAdapter(context: Context)
     : CommonRecyclerAdapter<ResultsBean>(context, null, R.layout.item_category),
         ListenerWithPosition.OnClickWithPositionListener<CommonRecyclerHolder> {
 
@@ -24,7 +23,7 @@ class CategoryRecyclerAdapter(context: Context)
             if (ConfigManage.isListShowImg()) { // 列表显示图片
                 imageView.visibility = View.VISIBLE
                 var quality = ""
-                if (resultsBean.images != null && resultsBean.images.isNotEmpty()) {
+                if (resultsBean.url != null && resultsBean.url.isNotEmpty()) {
                     when (ConfigManage.getThumbnailQuality()) {
                         0 // 原图
                         -> quality = ""
@@ -33,7 +32,7 @@ class CategoryRecyclerAdapter(context: Context)
                         2 -> quality = "?imageView2/0/w/190"
                     }
                     Glide.with(mContext)
-                            .load(resultsBean.images[0] + quality)
+                            .load(resultsBean.url + quality)
                             .placeholder(R.mipmap.image_default)
                             .error(R.mipmap.image_default)
                             .into(imageView)
@@ -58,9 +57,7 @@ class CategoryRecyclerAdapter(context: Context)
     }
 
     override fun onClick(v: View, position: Int, holder: CommonRecyclerHolder) {
-        val intent = Intent(mContext, WebViewActivity::class.java)
-        intent.putExtra(WebViewActivity.GANK_TITLE, mData[position].desc)
-        intent.putExtra(WebViewActivity.GANK_URL, mData[position].url)
-        mContext.startActivity(intent)
+        mContext.startActivity(PictureActivity.newIntent(mContext, mData[position].url, mData[position].desc))
+//        PictureActivity.start(mContext as Activity, mData[position].url, mData[position].desc, v)
     }
 }

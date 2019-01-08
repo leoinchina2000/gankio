@@ -1,4 +1,4 @@
-package com.ccooy.gankio.base.adapter
+package com.ccooy.gankio.module.base.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

@@ -1,16 +1,15 @@
-package com.ccooy.gankio.module.home
+package com.ccooy.gankio.module.category
 
 import android.support.v4.view.ViewPager
 import com.ccooy.gankio.R
 import android.view.View
-import com.ccooy.gankio.base.adapter.CommonViewPagerAdapter
+import com.ccooy.gankio.module.base.adapter.CommonViewPagerAdapter
 import com.ccooy.gankio.config.GlobalConfig
 import com.ccooy.gankio.module.base.BaseFragment
-import com.ccooy.gankio.module.category.CategoryFragment
 import com.kekstudio.dachshundtablayout.DachshundTabLayout
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
-class HomeFragment : BaseFragment() {
+class CategoryAllFragment : BaseFragment() {
 
     private lateinit var mTabLayout: DachshundTabLayout
     private lateinit var mViewPager: ViewPager
@@ -63,7 +62,7 @@ class HomeFragment : BaseFragment() {
         mViewPager.adapter = infoPagerAdapter
         mTabLayout.setupWithViewPager(mViewPager)
         mViewPager.currentItem = 1
-        mViewPager.offscreenPageLimit = 3
+        mViewPager.offscreenPageLimit = 1
     }
 
     override fun onDestroy() {
@@ -72,8 +71,8 @@ class HomeFragment : BaseFragment() {
 
     companion object {
 
-        fun newInstance(tag: String): HomeFragment {
-            val homeFragment = HomeFragment()
+        fun newInstance(tag: String): CategoryAllFragment {
+            val homeFragment = CategoryAllFragment()
             return homeFragment
         }
     }

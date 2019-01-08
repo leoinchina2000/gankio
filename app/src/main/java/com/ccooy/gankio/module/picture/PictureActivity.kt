@@ -57,13 +57,13 @@ class PictureActivity : BaseActivity(), PictureView {
     override fun initView(savedInstanceState: Bundle?) {
         mToolbar = picture_toolbar
         mImgView = picture_img
-        mImgView.background = ColorDrawable(this.resources.getColor(R.color.dark_grey))
+        mImgView.background = ColorDrawable(this.resources.getColor(R.color.white))
         mProgressBar = picture_progress
         mSaveBtn = picture_btn_save
 
         showProgress()
         parseIntent()
-        ViewCompat.setTransitionName(mImgView, TRANSIT_PIC)
+//        ViewCompat.setTransitionName(mImgView, TRANSIT_PIC)
 
         mToolbar.title = if (TextUtils.isEmpty(mImageTitle)) "图片预览" else mImageTitle
         mToolbar.setNavigationOnClickListener { finish() }
@@ -136,11 +136,11 @@ class PictureActivity : BaseActivity(), PictureView {
             return intent
         }
 
-        fun start(context: Activity, url: String, desc: String, banner: Banner) {
+        fun start(context: Activity, url: String, desc: String, view: View) {
             val intent = Intent(context, PictureActivity::class.java)
             intent.putExtra(EXTRA_IMAGE_URL, url)
             intent.putExtra(EXTRA_IMAGE_TITLE, desc)
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, banner, TRANSIT_PIC)//与xml文件对应
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(context, view, TRANSIT_PIC)//与xml文件对应
             ActivityCompat.startActivity(context, intent, options.toBundle())
         }
     }

@@ -3,22 +3,19 @@ package com.ccooy.gankio.module.home
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
-import android.support.v4.view.ViewPager
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationBar.*
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
+import com.ccooy.gankio.App
 import com.ccooy.gankio.R
-import com.ccooy.gankio.base.adapter.CommonViewPagerAdapter
-import com.ccooy.gankio.config.GlobalConfig
 import com.ccooy.gankio.module.base.BaseActivity
-import com.ccooy.gankio.module.category.CategoryFragment
+import com.ccooy.gankio.module.category.CategoryAllFragment
 import com.ccooy.gankio.module.fuli.FuliFragment
-import com.ccooy.gankio.utils.*
-import com.kekstudio.dachshundtablayout.DachshundTabLayout
+import com.ccooy.gankio.module.test.TestFragment
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_home.*
 
 /**
@@ -39,10 +36,11 @@ class MainActivity : BaseActivity() {
         mLLContent = ll_content
         mMainLayout = mainActivity
 
-        var homeFragment: HomeFragment = HomeFragment.newInstance("Home Fragment")
-        var articleFragment: FuliFragment = FuliFragment.newInstance("Article Fragment")
+        var testFragment: TestFragment = TestFragment.newInstance("Test Fragment")
+        var categoryAllFragment: CategoryAllFragment = CategoryAllFragment.newInstance("All Category Fragment")
+        var articleFragment: TestFragment = TestFragment.newInstance("Article Fragment")
         var fuliFragment: FuliFragment = FuliFragment.newInstance("Fuli Fragment")
-        var mineFragment: FuliFragment = FuliFragment.newInstance("Mine Fragment")
+        var mineFragment: TestFragment = TestFragment.newInstance("Mine Fragment")
 
         bottomNavigationBar.setTabSelectedListener(object: BottomNavigationBar.OnTabSelectedListener{
                 override fun onTabReselected(position: Int) {
@@ -56,22 +54,22 @@ class MainActivity : BaseActivity() {
                     var transaction:FragmentTransaction = supportFragmentManager.beginTransaction()
                     when(position){
                         0 -> {
-                            if(homeFragment==null){
-                                homeFragment=HomeFragment.newInstance("Home Fragment")
+                            if(testFragment==null){
+                                testFragment=TestFragment.newInstance("Today Fragment")
                             }
-                            transaction.replace(R.id.ll_content, homeFragment)
+                            transaction.replace(R.id.ll_content, testFragment)
                         }
                         1 -> {
-                            if(fuliFragment==null){
-                                fuliFragment=FuliFragment.newInstance("Fuli Fragment")
+                            if(categoryAllFragment==null){
+                                categoryAllFragment= CategoryAllFragment.newInstance("All Category Fragment")
                             }
-                            transaction.replace(R.id.ll_content, fuliFragment)
+                            transaction.replace(R.id.ll_content, categoryAllFragment)
                         }
                         2 -> {
-                            if(fuliFragment==null){
-                                fuliFragment=FuliFragment.newInstance("Fuli Fragment")
+                            if(articleFragment==null){
+                                articleFragment=TestFragment.newInstance("Article Fragment")
                             }
-                            transaction.replace(R.id.ll_content, fuliFragment)
+                            transaction.replace(R.id.ll_content, articleFragment)
                         }
                         3 -> {
                             if(fuliFragment==null){
@@ -79,11 +77,17 @@ class MainActivity : BaseActivity() {
                             }
                             transaction.replace(R.id.ll_content, fuliFragment)
                         }
-                        else -> {
-                            if(homeFragment==null){
-                                homeFragment=HomeFragment.newInstance("Home Fragment")
+                        4 -> {
+                            if(mineFragment==null){
+                                mineFragment=TestFragment.newInstance("Mine Fragment")
                             }
-                            transaction.replace(R.id.ll_content, homeFragment)
+                            transaction.replace(R.id.ll_content, mineFragment)
+                        }
+                        else -> {
+                            if(testFragment==null){
+                                testFragment= TestFragment.newInstance("Test Fragment")
+                            }
+                            transaction.replace(R.id.ll_content, testFragment)
                         }
                     }
                     transaction.commit()
@@ -97,6 +101,7 @@ class MainActivity : BaseActivity() {
             .setInActiveColor("#929292") // 未选中状态颜色
             .setActiveColor("#ffffff") // 选中状态颜色
             .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"首页").setInactiveIconResource(R.drawable.ic_launcher_foreground)) // 添加Item
+            .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"分类").setInactiveIconResource(R.drawable.ic_launcher_foreground))
             .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"闲读").setInactiveIconResource(R.drawable.ic_launcher_foreground))
             .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"福利").setInactiveIconResource(R.drawable.ic_launcher_foreground))
             .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"我的").setInactiveIconResource(R.drawable.ic_launcher_foreground))
@@ -104,7 +109,7 @@ class MainActivity : BaseActivity() {
 
         bottomNavigationBar.setFirstSelectedPosition(0)
         var transaction:FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.ll_content, homeFragment)
+        transaction.replace(R.id.ll_content, testFragment)
         transaction.commit()
     }
 
@@ -119,7 +124,7 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         if (System.currentTimeMillis() - mExitTime > 2000) {
-            Snackbar.make(mMainLayout, R.string.exit_toast, Toast.LENGTH_SHORT).show()
+            Toasty.normal(App.instance, resources.getString(R.string.exit_toast)).show()
             mExitTime = System.currentTimeMillis()
         } else {
             finish()
