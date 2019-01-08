@@ -11,6 +11,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar.*
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.ccooy.gankio.App
 import com.ccooy.gankio.R
+import com.ccooy.gankio.module.article.ArticleFragment
 import com.ccooy.gankio.module.base.BaseActivity
 import com.ccooy.gankio.module.category.CategoryAllFragment
 import com.ccooy.gankio.module.fuli.FuliFragment
@@ -36,9 +37,9 @@ class MainActivity : BaseActivity() {
         mLLContent = ll_content
         mMainLayout = mainActivity
 
-        var testFragment: TestFragment = TestFragment.newInstance("Test Fragment")
+        var homeFragment: HomeFragment = HomeFragment.newInstance("Home Fragment")
         var categoryAllFragment: CategoryAllFragment = CategoryAllFragment.newInstance("All Category Fragment")
-        var articleFragment: TestFragment = TestFragment.newInstance("Article Fragment")
+        var articleFragment: ArticleFragment = ArticleFragment.newInstance("Article Fragment")
         var fuliFragment: FuliFragment = FuliFragment.newInstance("Fuli Fragment")
         var mineFragment: TestFragment = TestFragment.newInstance("Mine Fragment")
 
@@ -54,10 +55,10 @@ class MainActivity : BaseActivity() {
                     var transaction:FragmentTransaction = supportFragmentManager.beginTransaction()
                     when(position){
                         0 -> {
-                            if(testFragment==null){
-                                testFragment=TestFragment.newInstance("Today Fragment")
+                            if(homeFragment==null){
+                                homeFragment=HomeFragment.newInstance("Today Fragment")
                             }
-                            transaction.replace(R.id.ll_content, testFragment)
+                            transaction.replace(R.id.ll_content, homeFragment)
                         }
                         1 -> {
                             if(categoryAllFragment==null){
@@ -67,7 +68,7 @@ class MainActivity : BaseActivity() {
                         }
                         2 -> {
                             if(articleFragment==null){
-                                articleFragment=TestFragment.newInstance("Article Fragment")
+                                articleFragment=ArticleFragment.newInstance("Article Fragment")
                             }
                             transaction.replace(R.id.ll_content, articleFragment)
                         }
@@ -84,10 +85,10 @@ class MainActivity : BaseActivity() {
                             transaction.replace(R.id.ll_content, mineFragment)
                         }
                         else -> {
-                            if(testFragment==null){
-                                testFragment= TestFragment.newInstance("Test Fragment")
+                            if(mineFragment==null){
+                                mineFragment= TestFragment.newInstance("Test Fragment")
                             }
-                            transaction.replace(R.id.ll_content, testFragment)
+                            transaction.replace(R.id.ll_content, mineFragment)
                         }
                     }
                     transaction.commit()
@@ -109,7 +110,7 @@ class MainActivity : BaseActivity() {
 
         bottomNavigationBar.setFirstSelectedPosition(0)
         var transaction:FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.ll_content, testFragment)
+        transaction.replace(R.id.ll_content, homeFragment)
         transaction.commit()
     }
 

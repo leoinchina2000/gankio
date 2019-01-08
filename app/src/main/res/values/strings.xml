@@ -6,6 +6,7 @@
     <string name="rv_with_footer_pull_load_more">上拉或点击加载更多</string>
     <string name="rv_with_footer_loading">加载中…</string>
     <string name="rv_with_footer_empty">没有数据啦</string>
+    <string name="search">搜索</string>
     <string name="cc">cc</string>
     <string name="action_share">分享</string>
     <string name="scale_up_show_behavior">com.ccooy.gankio.widget.behavior.ScaleUpShowBehavior</string>

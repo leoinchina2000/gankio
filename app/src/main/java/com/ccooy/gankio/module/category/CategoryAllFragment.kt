@@ -7,7 +7,7 @@ import com.ccooy.gankio.module.base.adapter.CommonViewPagerAdapter
 import com.ccooy.gankio.config.GlobalConfig
 import com.ccooy.gankio.module.base.BaseFragment
 import com.kekstudio.dachshundtablayout.DachshundTabLayout
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_all_category.view.*
 
 class CategoryAllFragment : BaseFragment() {
 
@@ -15,7 +15,7 @@ class CategoryAllFragment : BaseFragment() {
     private lateinit var mViewPager: ViewPager
 
     override val contentViewLayoutID: Int
-        get() = R.layout.fragment_home
+        get() = R.layout.fragment_all_category
 
     override fun init(view: View) {
         mTabLayout = view.main_tab

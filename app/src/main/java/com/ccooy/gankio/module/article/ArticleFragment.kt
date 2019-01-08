@@ -1,11 +1,10 @@
-package com.ccooy.gankio.module.test
+package com.ccooy.gankio.module.article
 
 import com.ccooy.gankio.module.base.BaseFragment
 import android.view.View
 import com.ccooy.gankio.R
 
-class TestFragment : BaseFragment() {
-
+class ArticleFragment : BaseFragment() {
 
     override val contentViewLayoutID: Int
         get() = R.layout.fragment_test
@@ -20,8 +19,8 @@ class TestFragment : BaseFragment() {
 
     companion object {
 
-        fun newInstance(tag: String): TestFragment {
-            val fragment = TestFragment()
+        fun newInstance(tag: String): ArticleFragment {
+            val fragment = ArticleFragment()
             return fragment
         }
     }
