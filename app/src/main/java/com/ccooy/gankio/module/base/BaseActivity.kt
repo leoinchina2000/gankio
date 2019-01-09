@@ -54,7 +54,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        AndroidUtil.fixInputMethod(this)
+        AndroidUtil.fixLeak(this)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

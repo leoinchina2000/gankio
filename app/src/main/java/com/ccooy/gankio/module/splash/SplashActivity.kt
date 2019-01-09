@@ -25,9 +25,6 @@ import java.util.concurrent.TimeUnit
 class SplashActivity : BaseActivity() {
     private var isIn: Boolean = false
 
-    @BindView(R.id.splash_tv_jump)
-    public lateinit var mTvJump: TextView
-
     override val contentViewLayoutID: Int
         get() = R.layout.activity_splash
 

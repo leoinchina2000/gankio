@@ -1,8 +1,12 @@
 package com.ccooy.gankio.module.home
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.FragmentTransaction
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -16,6 +20,7 @@ import com.ccooy.gankio.module.base.BaseActivity
 import com.ccooy.gankio.module.category.CategoryAllFragment
 import com.ccooy.gankio.module.fuli.FuliFragment
 import com.ccooy.gankio.module.test.TestFragment
+import com.ccooy.gankio.utils.StatusBarUtil
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -24,6 +29,14 @@ import kotlinx.android.synthetic.main.activity_home.*
  *
  */
 class MainActivity : BaseActivity() {
+    companion object {
+        //读写权限
+        val PERMISSIONS_STORAGE = arrayOf(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        const val REQUEST_PERMISSION_CODE = 2
+    }
 
     lateinit var mLLContent: LinearLayout
     lateinit var mMainLayout: ConstraintLayout
@@ -98,14 +111,14 @@ class MainActivity : BaseActivity() {
         bottomNavigationBar
             .setMode(MODE_FIXED) // 设置mode
             .setBackgroundStyle(BACKGROUND_STYLE_STATIC)  // 背景样式
-            .setBarBackgroundColor("#2FA8E1") // 背景颜色
-            .setInActiveColor("#929292") // 未选中状态颜色
-            .setActiveColor("#ffffff") // 选中状态颜色
-            .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"首页").setInactiveIconResource(R.drawable.ic_launcher_foreground)) // 添加Item
-            .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"分类").setInactiveIconResource(R.drawable.ic_launcher_foreground))
-            .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"闲读").setInactiveIconResource(R.drawable.ic_launcher_foreground))
-            .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"福利").setInactiveIconResource(R.drawable.ic_launcher_foreground))
-            .addItem(BottomNavigationItem(R.drawable.ic_launcher_background,"我的").setInactiveIconResource(R.drawable.ic_launcher_foreground))
+            .setBarBackgroundColor(R.color.bg_grey) // 背景颜色
+            .setInActiveColor(R.color.grey88) // 未选中状态颜色
+            .setActiveColor(R.color.dark_grey) // 选中状态颜色
+            .addItem(BottomNavigationItem(R.drawable.home_filled,"首页").setInactiveIconResource(R.drawable.home)) // 添加Item
+            .addItem(BottomNavigationItem(R.drawable.hot_article_filled,"分类").setInactiveIconResource(R.drawable.hot_article))
+            .addItem(BottomNavigationItem(R.drawable.magazine_filled,"闲读").setInactiveIconResource(R.drawable.magazine))
+            .addItem(BottomNavigationItem(R.drawable.gift_filled,"福利").setInactiveIconResource(R.drawable.gift))
+            .addItem(BottomNavigationItem(R.drawable.user_filled,"我的").setInactiveIconResource(R.drawable.user))
             .initialise()  // 提交初始化（完成配置）
 
         bottomNavigationBar.setFirstSelectedPosition(0)
@@ -116,7 +129,12 @@ class MainActivity : BaseActivity() {
 
     override fun beforeInit() {
         super.beforeInit()
-//        StatusBarUtil.setTranslucent(this)
+//        StatusBarUtil.setColorNoTranslucent(this, resources.getColor(R.color.main_white))
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE)
+            }
+        }
     }
 
     override fun onDestroy() {
