@@ -15,7 +15,7 @@ import com.ccooy.gankio.module.web.WebViewActivity
 import com.ccooy.gankio.utils.TimeUtil
 
 class CategoriesRecyclerAdapter(context: Context)
-    : CommonRecyclerAdapter<ResultsBean>(context, null, R.layout.item_category),
+    : CommonRecyclerAdapter<ResultsBean>(context, null, R.layout.item_xiandu_category),
         ListenerWithPosition.OnClickWithPositionListener<CommonRecyclerHolder> {
 
     override fun convert(holder: CommonRecyclerHolder, resultsBean: ResultsBean?) {
