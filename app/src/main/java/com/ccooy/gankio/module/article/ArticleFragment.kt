@@ -7,7 +7,7 @@ import com.ccooy.gankio.R
 class ArticleFragment : BaseFragment() {
 
     override val contentViewLayoutID: Int
-        get() = R.layout.fragment_test
+        get() = R.layout.fragment_article
 
     override fun init(view: View) {
 

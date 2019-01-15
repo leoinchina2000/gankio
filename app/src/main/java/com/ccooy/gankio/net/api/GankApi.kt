@@ -62,7 +62,7 @@ interface GankApi {
      * 获取发过干货的日期数据
      */
     @GET("day/history")
-    fun getOneDayData(): Observable<HistoryDateResult>
+    fun getHistoryDay(): Observable<HistoryDateResult>
 
     /**
      * 获取特定日期网站数据
