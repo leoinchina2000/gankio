@@ -350,7 +350,6 @@ public class RecyclerViewWithFooter extends RecyclerView {
         public void registerAdapterDataObserver(AdapterDataObserver observer) {
             super.registerAdapterDataObserver(observer);
             mAdapter.registerAdapterDataObserver(observer);
-
         }
 
         @Override

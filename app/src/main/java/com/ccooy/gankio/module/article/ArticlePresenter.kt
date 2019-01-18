@@ -1,6 +1,7 @@
 package com.ccooy.gankio.module.article
 
 import com.ccooy.gankio.model.XianDuCategoriesResult
+import com.ccooy.gankio.model.XianDuSubCategoryResult
 import com.ccooy.gankio.net.NetWork
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -9,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 
 class ArticlePresenter(
     private val mArticleView: IArticleView
-) : IArticlePresenter{
+) : IArticlePresenter {
 
     private var mPage = 1
     private var mDisposable: Disposable? = null
@@ -27,6 +28,7 @@ class ArticlePresenter(
     }
 
     override fun getCategories() {
+        mArticleView.showSwipeLoading()
         val observer: Observer<XianDuCategoriesResult> = object : Observer<XianDuCategoriesResult> {
             override fun onComplete() {
 
@@ -38,21 +40,21 @@ class ArticlePresenter(
 
             override fun onError(e: Throwable) {
                 mArticleView.hideSwipeLoading()
-                mArticleView.getCategoryItemsFail("列表数据获取失败！")
+                mArticleView.getXianDuCategoryItemsFail("列表数据获取失败！")
             }
 
             override fun onNext(categoryResult: XianDuCategoriesResult) {
                 if (categoryResult != null && !categoryResult.error) {
                     if (categoryResult.results.isEmpty()) {
                         // 如果可以，这里可以增加占位图
-                        mArticleView.getCategoryItemsFail("获取数据为空！")
+                        mArticleView.getXianDuCategoryItemsFail("获取数据为空！")
                     } else {
                         mArticleView.setXianDuCategoryItems(categoryResult.results)
                         mArticleView.hideSwipeLoading()
-                        mArticleView.setLoading()
+                        mArticleView.setNoMore()
                     }
                 } else {
-                    mArticleView.getCategoryItemsFail("获取数据失败！")
+                    mArticleView.getXianDuCategoryItemsFail("获取数据失败！")
                 }
 
             }
@@ -66,6 +68,43 @@ class ArticlePresenter(
     }
 
     override fun getSubCategory(category: String) {
+        mArticleView.showSwipeLoading()
+        val observer: Observer<XianDuSubCategoryResult> = object : Observer<XianDuSubCategoryResult> {
+            override fun onComplete() {
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+                mDisposable = d
+            }
+
+            override fun onError(e: Throwable) {
+                mArticleView.hideSwipeLoading()
+                mArticleView.getXianDuSubCategoryItemsFail("列表数据获取失败！")
+            }
+
+            override fun onNext(categoryResult: XianDuSubCategoryResult) {
+                if (categoryResult != null && !categoryResult.error) {
+                    if (categoryResult.results.isEmpty()) {
+                        // 如果可以，这里可以增加占位图
+                        mArticleView.getXianDuSubCategoryItemsFail("获取数据为空！")
+                    } else {
+                        mArticleView.setXianDuSubCategoryItems(categoryResult.results)
+                        mArticleView.hideSwipeLoading()
+                        mArticleView.setNoMore()
+                    }
+                } else {
+                    mArticleView.getXianDuSubCategoryItemsFail("获取数据失败！")
+                }
+
+            }
+        }
+
+        NetWork.getGankApi()
+            .getXianDuCategory(category)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(observer)
 
     }
 

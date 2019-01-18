@@ -2,23 +2,18 @@ package com.ccooy.gankio.module.home
 
 import android.content.Intent
 import android.view.View
-import butterknife.OnClick
 import com.ccooy.gankio.R
 import com.ccooy.gankio.module.base.BaseFragment
 import com.ccooy.gankio.module.search.SearchActivity
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : BaseFragment() {
-
-    @OnClick(R.id.search_bar)
-    fun click(){
-        toSearchActivity()
-    }
 
     override val contentViewLayoutID: Int
         get() = R.layout.fragment_home
 
     override fun init(view: View) {
-
+        view.search_bar.setOnClickListener { toSearchActivity() }
     }
 
     override fun onDestroy() {

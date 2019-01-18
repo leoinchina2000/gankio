@@ -38,7 +38,7 @@ class FuliFragment : BaseFragment() , FuliContract.IFuliView, SwipeRefreshLayout
         mSwipeRefreshLayout.setOnRefreshListener(this)
 
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
-        mRecyclerView.addItemDecoration(RecyclerViewDivider(activity!!, LinearLayoutManager.HORIZONTAL))
+//        mRecyclerView.addItemDecoration(RecyclerViewDivider(activity!!, LinearLayoutManager.HORIZONTAL))
         mRecyclerView.adapter = mAdapter
         mRecyclerView.setOnLoadMoreListener(this)
         mRecyclerView.setEmpty()

@@ -8,13 +8,11 @@ import com.ccooy.gankio.model.XianDuSubCategoryBean
 
 interface IArticleView : BaseView {
 
-    val categoryName: String
+    fun getXianDuCategoryItemsFail(failMessage: String)
 
-    fun getCategoryItemsFail(failMessage: String)
+    fun getXianDuSubCategoryItemsFail(failMessage: String)
 
-    fun getSubCategoryItemsFail(failMessage: String)
-
-    fun getCategoryDataItemsFail(failMessage: String)
+    fun getXianDuCategoryDataItemsFail(failMessage: String)
 
     fun setXianDuCategoryItems(data: List<XianDuCategoryBean>)
 

@@ -33,12 +33,11 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        unbinder = ButterKnife.bind(this, view)
+        ButterKnife.bind(this, view)
         init(view)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        unbinder.unbind()
     }
 }

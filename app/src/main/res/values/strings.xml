@@ -44,4 +44,6 @@
     <!--blog-->
     <string name="string_url_blog">http://mcflag.github.io</string>
     <string name="string_url_gankio">http://gank.io/api</string>
+    <string name="xiandu_main_tab">主分类</string>
+    <string name="xiandu_sub_tab">子分类</string>
 </resources>
