@@ -82,7 +82,7 @@ data class XianDuSubCategoryResult(
 
 data class XianDuSubCategoryBean(
     var _id: String,
-    var createdAt: String,
+    var created_at: String,
     var icon: String,
     var id: String,
     var title: String
@@ -97,14 +97,15 @@ data class XianDuDataBean(
     var _id: String,
     var content: String,
     var cover: String,
-    var crawled: Int,
+    var crawled: Long,
     var created_at: String,
     var deleted: Boolean,
     var published_at: String,
     var raw: String,
     var site: SiteBean,
     var title: String,
-    var uid: String
+    var uid: String,
+    var url: String
 )
 
 data class SiteBean(

@@ -1,6 +1,8 @@
 package com.ccooy.gankio.module.article
 
+import com.ccooy.gankio.config.GlobalConfig
 import com.ccooy.gankio.model.XianDuCategoriesResult
+import com.ccooy.gankio.model.XianDuDataResult
 import com.ccooy.gankio.model.XianDuSubCategoryResult
 import com.ccooy.gankio.net.NetWork
 import io.reactivex.Observer
@@ -108,7 +110,57 @@ class ArticlePresenter(
 
     }
 
-    override fun getData(isRefresh: Boolean) {
+    override fun getData(isRefresh: Boolean, subCategoryId: String) {
+        if (isRefresh) {
+            mPage = 1
+            mArticleView.showSwipeLoading()
+        } else {
+            mPage++
+        }
+        val observer: Observer<XianDuDataResult> = object : Observer<XianDuDataResult> {
+            override fun onComplete() {
+
+            }
+
+            override fun onSubscribe(d: Disposable) {
+                mDisposable = d
+            }
+
+            override fun onError(e: Throwable) {
+                mArticleView.hideSwipeLoading()
+                mArticleView.getXianDuCategoryDataItemsFail(subCategoryId + " 列表数据获取失败！")
+            }
+
+            override fun onNext(xianduDataResult: XianDuDataResult) {
+                if (xianduDataResult != null && !xianduDataResult.error) {
+                    if (xianduDataResult.results.isEmpty()) {
+                        // 如果可以，这里可以增加占位图
+                        mArticleView.getXianDuCategoryDataItemsFail("获取数据为空！")
+                    } else {
+                        if (isRefresh) {
+                            mArticleView.setXianDuDataItems(xianduDataResult.results)
+                            mArticleView.hideSwipeLoading()
+                            mArticleView.setLoading()
+                        } else {
+                            mArticleView.addXianDuDataItems(xianduDataResult.results)
+                        }
+                        // 如果当前获取的数据数目没有全局设定的每次获取的条数，说明已经没有更多数据
+                        if (xianduDataResult.results.size < GlobalConfig.CATEGORY_COUNT) {
+                            mArticleView.setNoMore()
+                        }
+                    }
+                } else {
+                    mArticleView.getXianDuCategoryDataItemsFail("获取数据失败！")
+                }
+
+            }
+        }
+
+        NetWork.getGankApi()
+            .getXianDuData(subCategoryId, GlobalConfig.CATEGORY_COUNT, mPage)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(observer)
 
     }
 }

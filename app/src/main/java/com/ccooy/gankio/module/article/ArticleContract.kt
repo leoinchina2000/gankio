@@ -37,5 +37,5 @@ interface IArticlePresenter : BasePresenter {
 
     fun getSubCategory(category: String)
 
-    fun getData(isRefresh: Boolean)
+    fun getData(isRefresh: Boolean, subCategoryId: String)
 }

@@ -1,5 +1,6 @@
 package com.ccooy.gankio.module.article
 
+import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -13,6 +14,7 @@ import com.ccooy.gankio.model.XianDuCategoryBean
 import com.ccooy.gankio.model.XianDuDataBean
 import com.ccooy.gankio.model.XianDuSubCategoryBean
 import com.ccooy.gankio.module.base.adapter.ListenerWithPosition
+import com.ccooy.gankio.module.web.WebViewActivity
 import com.ccooy.gankio.widget.RecyclerViewDivider
 import com.ccooy.gankio.widget.RecyclerViewWithFooter.OnLoadMoreListener
 import com.ccooy.gankio.widget.RecyclerViewWithFooter.RecyclerViewWithFooter
@@ -23,6 +25,8 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
     private lateinit var mRecyclerViewMain: RecyclerViewWithFooter
     private lateinit var mRecyclerViewSub: RecyclerViewWithFooter
     private lateinit var mRecyclerView: RecyclerViewWithFooter
+    private lateinit var mSwipeRefreshLayoutMain: SwipeRefreshLayout
+    private lateinit var mSwipeRefreshLayoutSub: SwipeRefreshLayout
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     private lateinit var mMainTab: TextView
     private lateinit var mSubTab: TextView
@@ -44,6 +48,9 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
     private val mSubAdapter: SubCategoryRecyclerAdapter by lazy {
         SubCategoryRecyclerAdapter(context!!)
     }
+    private val mDataAdapter: DataRecyclerAdapter by lazy {
+        DataRecyclerAdapter(context!!)
+    }
     private val mICategoryPresenter: IArticlePresenter by lazy {
         ArticlePresenter(this)
     }
@@ -56,6 +63,8 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
         mRecyclerViewMain = view.recyclerViewMain
         mRecyclerViewSub = view.recyclerViewSub
         mRecyclerView = view.recyclerView
+        mSwipeRefreshLayoutMain = view.swipe_refresh_layout_main
+        mSwipeRefreshLayoutSub = view.swipe_refresh_layout_sub
         mSwipeRefreshLayout = view.swipe_refresh_layout
         mArrowTab = view.arrow
         mMainTab = view.main_category_tab
@@ -66,11 +75,14 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
         initSwipeRefreshLayout()
         initMainRecyclerView()
         initSubRecyclerView()
+        initDataRecyclerView()
 
-        mICategoryPresenter.subscribe()
+        switchMode(XianDuMode.GETMAIN)
     }
 
     fun initSwipeRefreshLayout(){
+        mSwipeRefreshLayoutMain.setOnRefreshListener(this)
+        mSwipeRefreshLayoutSub.setOnRefreshListener(this)
         mSwipeRefreshLayout.setOnRefreshListener(this)
     }
 
@@ -90,6 +102,7 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
         mSubAdapter.setOnItemClickListener(ListenerWithPosition.OnClickWithPositionListener { v, position, holder ->
             subCategoryId = mSubAdapter.getItem(position).id
             mSubTab.text = mSubAdapter.getItem(position).title
+            switchMode(XianDuMode.GETDATA)
         })
         mRecyclerViewSub.layoutManager = LinearLayoutManager(activity)
         mRecyclerViewSub.setOnLoadMoreListener(this)
@@ -98,33 +111,43 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
     }
 
     fun initDataRecyclerView(){
+        mDataAdapter.setOnItemClickListener(ListenerWithPosition.OnClickWithPositionListener { v, position, holder ->
+            val intent = Intent(activity, WebViewActivity::class.java)
+            intent.putExtra(WebViewActivity.GANK_TITLE, mDataAdapter.getItem(position).title)
+            intent.putExtra(WebViewActivity.GANK_URL, mDataAdapter.getItem(position).url)
+            activity?.startActivity(intent)
+        })
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
 //        mRecyclerView.addItemDecoration(RecyclerViewDivider(activity!!, LinearLayoutManager.HORIZONTAL))
         mRecyclerView.setOnLoadMoreListener(this)
         mRecyclerView.setEmpty()
-//        mRecyclerView.adapter = mAdapter
+        mRecyclerView.adapter = mDataAdapter
     }
 
     fun switchMode(toMode: XianDuMode) {
         when (toMode) {
             XianDuMode.GETMAIN -> {
-                mRecyclerViewMain.visibility=View.VISIBLE
-                mRecyclerViewSub.visibility=View.GONE
-                mSwipeRefreshLayout.visibility=View.GONE
+                mSwipeRefreshLayoutMain.visibility=View.VISIBLE
+                mSwipeRefreshLayoutSub.visibility=View.INVISIBLE
+                mSwipeRefreshLayout.visibility=View.INVISIBLE
                 mSubTab.visibility = View.INVISIBLE
                 mArrowTab.visibility = View.INVISIBLE
                 mainTabRefresh()
             }
             XianDuMode.GETSUB -> {
-                mRecyclerViewMain.visibility=View.GONE
-                mRecyclerViewSub.visibility=View.VISIBLE
-                mSwipeRefreshLayout.visibility=View.GONE
+                mSwipeRefreshLayoutMain.visibility=View.INVISIBLE
+                mSwipeRefreshLayoutSub.visibility=View.VISIBLE
+                mSwipeRefreshLayout.visibility=View.INVISIBLE
                 mSubTab.visibility = View.VISIBLE
                 mArrowTab.visibility = View.VISIBLE
                 subTabRefresh()
             }
-            XianDuMode.GETDATA -> mRecyclerView.setEnd("没有更多数据")
-            else -> Log.d("闲读", "模式错误")
+            XianDuMode.GETDATA -> {
+                mSwipeRefreshLayoutMain.visibility=View.INVISIBLE
+                mSwipeRefreshLayoutSub.visibility=View.INVISIBLE
+                mSwipeRefreshLayout.visibility=View.VISIBLE
+                dataRefresh()
+            }
         }
         mode = toMode
     }
@@ -138,20 +161,30 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
         when (mode) {
             XianDuMode.GETMAIN -> switchMode(XianDuMode.GETMAIN)
             XianDuMode.GETSUB -> switchMode(XianDuMode.GETSUB)
-            XianDuMode.GETDATA -> mRecyclerView.setEnd("数据刷新没有更多数据")
+            XianDuMode.GETDATA -> switchMode(XianDuMode.GETDATA)
         }
     }
 
     override fun onLoadMore() {
-
+        if (subCategoryId.isNotEmpty()) {
+            mICategoryPresenter.getData(false, subCategoryId)
+        }
     }
 
     override fun showSwipeLoading() {
-        mSwipeRefreshLayout.isRefreshing = true
+        when (mode) {
+            XianDuMode.GETMAIN -> mSwipeRefreshLayoutMain.isRefreshing = true
+            XianDuMode.GETSUB -> mSwipeRefreshLayoutSub.isRefreshing = true
+            XianDuMode.GETDATA -> mSwipeRefreshLayout.isRefreshing = true
+        }
     }
 
     override fun hideSwipeLoading() {
-        mSwipeRefreshLayout.isRefreshing = false
+        when (mode) {
+            XianDuMode.GETMAIN -> mSwipeRefreshLayoutMain.isRefreshing = false
+            XianDuMode.GETSUB -> mSwipeRefreshLayoutSub.isRefreshing = false
+            XianDuMode.GETDATA -> mSwipeRefreshLayout.isRefreshing = false
+        }
     }
 
     override fun setLoading() {
@@ -160,8 +193,14 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
 
     override fun setNoMore() {
         when (mode) {
-            XianDuMode.GETMAIN -> Log.d("闲读","主分类没有更多数据")
-            XianDuMode.GETSUB -> Log.d("闲读","子分类没有更多数据")
+            XianDuMode.GETMAIN -> {
+                mRecyclerViewMain.setEnd("主分类没有更多数据")
+                Log.d("闲读", "主分类没有更多数据")
+            }
+            XianDuMode.GETSUB -> {
+                mRecyclerViewSub.setEnd("子分类没有更多数据")
+                Log.d("闲读","子分类没有更多数据")
+            }
             XianDuMode.GETDATA -> mRecyclerView.setEnd("没有更多数据")
         }
     }
@@ -179,25 +218,25 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
     }
 
     override fun getXianDuCategoryDataItemsFail(failMessage: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (userVisibleHint) {
+            Toasty.error(App.instance, failMessage).show()
+        }
     }
 
     override fun setXianDuCategoryItems(data: List<XianDuCategoryBean>) {
         mAdapter.setData(data)
-        mAdapter.notifyDataSetChanged()
     }
 
     override fun setXianDuSubCategoryItems(data: List<XianDuSubCategoryBean>) {
         mSubAdapter.setData(data)
-        mSubAdapter.notifyDataSetChanged()
     }
 
     override fun setXianDuDataItems(data: List<XianDuDataBean>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mDataAdapter.setData(data)
     }
 
     override fun addXianDuDataItems(data: List<XianDuDataBean>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mDataAdapter.addData(data)
     }
 
     fun mainTabRefresh() {
@@ -211,6 +250,12 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
         subCategoryId = ""
         if (categoryEnName.isNotEmpty()) {
             mICategoryPresenter.getSubCategory(categoryEnName)
+        }
+    }
+
+    fun dataRefresh(){
+        if (subCategoryId.isNotEmpty()) {
+            mICategoryPresenter.getData(true, subCategoryId)
         }
     }
 
