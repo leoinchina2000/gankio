@@ -29,7 +29,7 @@ class HomeFragment : BaseFragment() {
     }
 
     /**
-     * 跳转到主页面
+     * 跳转到搜索
      */
     private fun toSearchActivity() {
         val intent = Intent(activity, SearchActivity::class.java)

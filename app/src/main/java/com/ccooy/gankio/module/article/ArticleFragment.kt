@@ -201,7 +201,10 @@ class ArticleFragment : BaseFragment(), IArticleView, SwipeRefreshLayout.OnRefre
                 mRecyclerViewSub.setEnd("子分类没有更多数据")
                 Log.d("闲读","子分类没有更多数据")
             }
-            XianDuMode.GETDATA -> mRecyclerView.setEnd("没有更多数据")
+            XianDuMode.GETDATA -> {
+                mRecyclerView.setEnd("没有更多数据")
+                Log.d("闲读","没有更多数据")
+            }
         }
     }
 
