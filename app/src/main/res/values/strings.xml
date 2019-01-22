@@ -7,6 +7,8 @@
     <string name="rv_with_footer_loading">加载中…</string>
     <string name="rv_with_footer_empty">没有数据啦</string>
     <string name="search">搜索</string>
+    <string name="search_hint">搜索</string>
+    <string name="search_category_hint">请选择搜索分类</string>
     <string name="cc">cc</string>
     <string name="action_share">分享</string>
     <string name="scale_up_show_behavior">com.ccooy.gankio.widget.behavior.ScaleUpShowBehavior</string>
@@ -46,4 +48,15 @@
     <string name="string_url_gankio">http://gank.io/api</string>
     <string name="xiandu_main_tab">主分类</string>
     <string name="xiandu_sub_tab">子分类</string>
+
+    <string name="search_category_all">all</string>
+    <string name="search_category_android">Android</string>
+    <string name="search_category_ios">iOS</string>
+    <string name="search_category_video">休息视频</string>
+    <string name="search_category_fuli">福利</string>
+    <string name="search_category_resource">拓展资源</string>
+    <string name="search_category_front">前端</string>
+    <string name="search_category_recommend">瞎推荐</string>
+    <string name="search_category_app">App</string>
+
 </resources>

@@ -10,8 +10,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class SearchPresenter(
-    private val mSearchView:ISearchView
-):ISearchPresenter{
+    private val mSearchView: ISearchView
+) : ISearchPresenter {
 
     private var mPage = 1
     private var mDisposable: Disposable? = null
@@ -46,18 +46,22 @@ class SearchPresenter(
 
             override fun onError(e: Throwable) {
                 mSearchView.hideSwipeLoading()
-                mSearchView.getSearchItemsFail(mSearchView.searchWords + " 列表数据获取失败！")
+                mSearchView.getSearchItemsFail("关键字：" + mSearchView.searchWords + "，分类：" + mSearchView.searchCategory + " 列表数据获取失败！")
             }
 
             override fun onNext(queryResult: QueryResult) {
+                mSearchView.hideSwipeLoading()
                 if (queryResult != null && !queryResult.error) {
                     if (queryResult.results.isEmpty()) {
                         // 如果可以，这里可以增加占位图
                         mSearchView.getSearchItemsFail("获取数据为空！")
+                        if (isRefresh) {
+                            mSearchView.setSearchItems(queryResult.results)
+                        }
+                        mSearchView.setNoMore()
                     } else {
                         if (isRefresh) {
                             mSearchView.setSearchItems(queryResult.results)
-                            mSearchView.hideSwipeLoading()
                             mSearchView.setLoading()
                         } else {
                             mSearchView.addSearchItems(queryResult.results)
@@ -75,7 +79,7 @@ class SearchPresenter(
         }
 
         NetWork.getGankApi()
-            .getQueryData(mSearchView.searchWords, "all", GlobalConfig.CATEGORY_COUNT, mPage)
+            .getQueryData(mSearchView.searchWords, mSearchView.searchCategory, GlobalConfig.CATEGORY_COUNT, mPage)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(observer)

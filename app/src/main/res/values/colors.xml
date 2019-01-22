@@ -37,4 +37,8 @@
     <color name="grey88">#888888</color>
     <color name="bg_grey">#F2F2F2</color>
     <color name="transparent">#00000000</color>
+
+    <color name="border_orange">#FEBD89</color>
+    <color name="back_orange">#44FFF7EB</color>
+    <color name="back_orange_press">#F7DFC6</color>
 </resources>

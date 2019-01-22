@@ -6,8 +6,8 @@
 
     <ImageView
             android:id="@+id/back_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/selector_back_btn"
             android:background="@drawable/selector_back_btn_bg"
             android:scaleType="fitXY"
@@ -18,8 +18,17 @@
     <EditText
             android:id="@+id/search_edit"
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textSize="14sp"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:lines="1"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:hint="@string/search_hint"
             android:background="@drawable/shape_round_circle_grey_half_light"
             app:layout_constraintLeft_toRightOf="@id/back_button"
             app:layout_constraintRight_toLeftOf="@id/search_button"
@@ -28,15 +37,173 @@
 
     <ImageView
             android:id="@+id/search_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/search"
             android:scaleType="fitXY"
-            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/selector_back_btn_bg"
             app:layout_constraintTop_toTopOf="@id/back_button"
             app:layout_constraintBottom_toBottomOf="@id/back_button"
             app:layout_constraintLeft_toRightOf="@id/search_edit"
             app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+            android:id="@+id/category_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:text="@string/search_category_hint"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/back_button"/>
+
+    <com.ccooy.gankio.widget.MyRadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/category_radio_group"
+            android:orientation="horizontal"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/category_hint">
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_category_all"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/grey44"
+                android:button="@null"
+                android:background="@drawable/selector_search_category_radio"
+                android:id="@+id/search_all"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/grey44"
+                android:button="@null"
+                android:background="@drawable/selector_search_category_radio"
+                android:text="@string/search_category_android"
+                android:id="@+id/search_android"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/grey44"
+                android:button="@null"
+                android:background="@drawable/selector_search_category_radio"
+                android:text="@string/search_category_ios"
+                android:id="@+id/search_ios"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/grey44"
+                android:button="@null"
+                android:background="@drawable/selector_search_category_radio"
+                android:text="@string/search_category_front"
+                android:id="@+id/search_front"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/grey44"
+                android:button="@null"
+                android:background="@drawable/selector_search_category_radio"
+                android:text="@string/search_category_app"
+                android:id="@+id/search_app"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/grey44"
+                android:button="@null"
+                android:background="@drawable/selector_search_category_radio"
+                android:text="@string/search_category_video"
+                android:id="@+id/search_video"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/grey44"
+                android:button="@null"
+                android:background="@drawable/selector_search_category_radio"
+                android:text="@string/search_category_fuli"
+                android:id="@+id/search_fuli"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/grey44"
+                android:button="@null"
+                android:background="@drawable/selector_search_category_radio"
+                android:text="@string/search_category_recommend"
+                android:id="@+id/search_recommend"/>
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textSize="14sp"
+                android:textColor="@color/grey44"
+                android:button="@null"
+                android:background="@drawable/selector_search_category_radio"
+                android:text="@string/search_category_resource"
+                android:id="@+id/search_resource"/>
+    </com.ccooy.gankio.widget.MyRadioGroup>
 
     <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
@@ -45,25 +212,12 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/back_button">
-
+            app:layout_constraintTop_toBottomOf="@id/category_radio_group">
 
         <com.ccooy.gankio.widget.RecyclerViewWithFooter.RecyclerViewWithFooter
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-
     </android.support.v4.widget.SwipeRefreshLayout>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            android:textSize="30sp"
-            android:textColor="@color/grey44"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
 </android.support.constraint.ConstraintLayout>
