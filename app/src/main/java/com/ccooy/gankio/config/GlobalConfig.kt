@@ -7,7 +7,7 @@ package com.ccooy.gankio.config
 
 object GlobalConfig {
 
-    const val BASE_URL = "http://gank.io/api/"
+    const val BASE_URL = "https://gank.io/api/"
 
     const val CATEGORY_COUNT = 10
 
