@@ -2,6 +2,7 @@ package com.ccooy.gankio.module.home
 
 import android.content.Intent
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.ccooy.gankio.App
@@ -14,12 +15,15 @@ import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
-class HomeFragment : BaseFragment(), IHomeView {
+class HomeFragment : BaseFragment(), IHomeView, SwipeRefreshLayout.OnRefreshListener {
     private lateinit var mRecyclerView: RecyclerViewWithFooter
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
 
     private val mHomePresenter: IHomePresenter by lazy {
         HomePresenter(this)
+    }
+    private val mAdapter: HomeRecyclerAdapter by lazy {
+        HomeRecyclerAdapter(context!!)
     }
     override val contentViewLayoutID: Int
         get() = R.layout.fragment_home
@@ -27,8 +31,13 @@ class HomeFragment : BaseFragment(), IHomeView {
     override fun init(view: View) {
         mRecyclerView = view.recyclerView
         mSwipeRefreshLayout = view.swipe_refresh_layout
+        mSwipeRefreshLayout.setOnRefreshListener(this)
 
         view.search_bar.setOnClickListener { toSearchActivity() }
+        mRecyclerView.layoutManager = LinearLayoutManager(activity)
+        mRecyclerView.adapter = mAdapter
+        mRecyclerView.setEmpty()
+
         mHomePresenter.subscribe()
     }
 
@@ -59,15 +68,23 @@ class HomeFragment : BaseFragment(), IHomeView {
         }
     }
 
+    override fun onRefresh() {
+        mHomePresenter.getTodayItems()
+    }
+
+    override fun setNoMore() {
+        mRecyclerView.setEnd("没有更多数据")
+    }
+
     override fun setTodayItems(data: List<ResultsBean>) {
-        Log.d("HomeFragment", data.toString())
+        mAdapter.setData(data)
     }
 
     override fun showLoading() {
-        spin_kit.visibility = View.VISIBLE
+        mSwipeRefreshLayout.isRefreshing = true
     }
 
     override fun hideLoading() {
-        spin_kit.visibility = View.GONE
+        mSwipeRefreshLayout.isRefreshing = false
     }
 }

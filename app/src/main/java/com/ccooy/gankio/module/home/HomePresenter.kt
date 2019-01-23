@@ -1,7 +1,5 @@
 package com.ccooy.gankio.module.home
 
-import com.ccooy.gankio.config.GlobalConfig
-import com.ccooy.gankio.model.CategoryResult
 import com.ccooy.gankio.model.DayResult
 import com.ccooy.gankio.model.ResultsBean
 import com.ccooy.gankio.net.NetWork
@@ -62,6 +60,7 @@ class HomePresenter(
                 } else {
                     mCategoryICategoryView.getTodayItemsFail("获取数据失败！")
                 }
+                mCategoryICategoryView.setNoMore()
 
             }
         }
