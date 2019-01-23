@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.View
@@ -16,8 +15,9 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import butterknife.OnClick
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.github.chrisbanes.photoview.PhotoView
 import com.ccooy.gankio.R
 import com.ccooy.gankio.module.base.BaseActivity
@@ -71,7 +71,7 @@ class PictureActivity : BaseActivity(), PictureView {
         supportActionBar?.hide()
 
         val target = object : SimpleTarget<Bitmap>() {
-            override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 hideProgress()
                 mBitmap = resource
                 if (resource != null) {
@@ -84,9 +84,9 @@ class PictureActivity : BaseActivity(), PictureView {
         }
 
         Glide.with(Utils.getContext())
-            .load(mImageUrl)
             .asBitmap()
-            .dontAnimate()
+            .load(mImageUrl)
+            .apply(RequestOptions().dontAnimate())
             .into(target)
 
     }

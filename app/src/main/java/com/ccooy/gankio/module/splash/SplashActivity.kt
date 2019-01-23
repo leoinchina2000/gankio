@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import butterknife.BindView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.ccooy.gankio.R
 import com.ccooy.gankio.config.ConstantsImageUrl
 import com.ccooy.gankio.module.base.BaseActivity
@@ -35,10 +36,9 @@ class SplashActivity : BaseActivity() {
         // 先显示默认图
 
         Glide.with(this)
-                .load(ConstantsImageUrl.TRANSITION_URLS[i])
-                .placeholder(R.drawable.img_transition_default)
-                .error(R.drawable.img_transition_default)
-                .into(splash_iv_pic)
+            .load(ConstantsImageUrl.TRANSITION_URLS[i])
+            .apply(RequestOptions().placeholder(R.drawable.img_transition_default).error(R.drawable.img_transition_default))
+            .into(splash_iv_pic)
 
         val observer: Observer<Long> = object : Observer<Long> {
             override fun onComplete() {
@@ -46,7 +46,7 @@ class SplashActivity : BaseActivity() {
             }
 
             override fun onNext(aLong: Long) {
-              splash_tv_jump.text= getString(R.string.jump) + "(" + (2 - aLong) + "s)"
+                splash_tv_jump.text = getString(R.string.jump) + "(" + (2 - aLong) + "s)"
             }
 
             override fun onError(e: Throwable) {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.ccooy.gankio.ConfigManage
 import com.ccooy.gankio.R
 import com.ccooy.gankio.model.XianDuDataBean
@@ -34,8 +35,7 @@ class DataRecyclerAdapter(context: Context) :
                     }
                     Glide.with(mContext)
                         .load(resultsBean.cover + quality)
-                        .placeholder(R.mipmap.image_default)
-                        .error(R.mipmap.image_default)
+                        .apply(RequestOptions().placeholder(R.mipmap.image_default).error(R.mipmap.image_default))
                         .into(imageView)
                 } else { // 列表不显示图片
                     Glide.with(mContext).load(R.mipmap.image_default).into(imageView)
@@ -44,8 +44,14 @@ class DataRecyclerAdapter(context: Context) :
                 imageView.visibility = View.GONE
             }
 
-            holder.setTextViewText(R.id.category_item_title, if (resultsBean.title == null || resultsBean.title.isEmpty()) "unknown" else resultsBean.title)
-            holder.setTextViewText(R.id.category_item_content, if (resultsBean.content == null || resultsBean.content.isEmpty()) "unknown" else resultsBean.content)
+            holder.setTextViewText(
+                R.id.category_item_title,
+                if (resultsBean.title == null || resultsBean.title.isEmpty()) "unknown" else resultsBean.title
+            )
+            holder.setTextViewText(
+                R.id.category_item_content,
+                if (resultsBean.content == null || resultsBean.content.isEmpty()) "unknown" else resultsBean.content
+            )
             holder.setTextViewText(R.id.category_item_time, TimeUtil.dateFormat(resultsBean.published_at))
             holder.setOnClickListener(listener, R.id.category_item_layout)
         }
