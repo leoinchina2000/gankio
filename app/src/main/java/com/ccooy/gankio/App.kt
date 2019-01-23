@@ -1,7 +1,6 @@
 package com.ccooy.gankio
 
 import android.app.Application
-import cn.bingoogolapple.swipebacklayout.BGASwipeBackManager
 import com.ccooy.gankio.utils.Utils
 import com.squareup.leakcanary.LeakCanary
 
@@ -31,7 +30,6 @@ class App : Application() {
         }
         LeakCanary.install(this)
 
-        BGASwipeBackManager.getInstance().init(this)
         ConfigManage.initConfig(this)
         Utils.init(this)
     }

@@ -24,7 +24,6 @@ import com.ccooy.gankio.module.base.BaseActivity
 import com.ccooy.gankio.module.picture.PictureContract.PictureView
 import com.ccooy.gankio.module.picture.PictureContract.Presenter
 import com.ccooy.gankio.utils.Utils
-import com.youth.banner.Banner
 import kotlinx.android.synthetic.main.activity_picture.*
 
 

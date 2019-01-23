@@ -1,51 +1,18 @@
 <resources>
     <string name="app_name">GankIO</string>
+
+    <string name="action_share">分享</string>
+
     <string name="exit_toast">再按一次退出程序哦~</string>
     <string name="jump">跳过</string>
-    <string name="jump_default">跳过(3s)</string>
+    <string name="jump_default">跳过（3s）</string>
     <string name="rv_with_footer_pull_load_more">上拉或点击加载更多</string>
     <string name="rv_with_footer_loading">加载中…</string>
     <string name="rv_with_footer_empty">没有数据啦</string>
     <string name="search">搜索</string>
     <string name="search_hint">搜索</string>
     <string name="search_category_hint">请选择搜索分类</string>
-    <string name="cc">cc</string>
-    <string name="action_share">分享</string>
-    <string name="scale_up_show_behavior">com.ccooy.gankio.widget.behavior.ScaleUpShowBehavior</string>
-    <string name="about_gank">关于Gank</string>
-    <string name="about_gankio">干货集中营
-    \n\n 数据来源于代码家的干货集中营https://gank.io。
-    \n\n 项目完全开源，如果你觉得不错，请帮忙star一下吧，或者点击右上角的分享，分享给你的朋友，这是你对我最大的支持，非常感谢！</string>
-    <string name="contact_me">联系我</string>
-    <string name="blog">Email:
-        \n whu_cc@163.com</string>
-    <string name="open">用到的开源库</string>
-    <string name="open_source">com.squareup.retrofit2:retrofit:2.2.0
-    \n\n com.squareup.retrofit2:adapter-rxjava:2.2.0
-    \n\n com.jakewharton:butterknife:8.5.1
-    \n\n com.github.bumptech.glide:glide:3.7.0
-    \n\n cn.bingoogolapple:bga-swipebacklayout:1.0.8
-    \n\n com.squareup.retrofit2:converter-gson:2.2.0
-    \n\n io.reactivex:rxandroid:1.2.1
-    \n\n com.github.Andy671:Dachshund-Tab-Layout:v0.3.0
-    \n\n de.hdodenhof:circleimageview:2.1.0
-    \n\n com.github.GrenderG:Toasty:1.1.3
-    \n\n com.youth.banner:banner:1.4.9</string>
 
-    <string name="string_share_text">发现了一个很好的blog，大力推荐哦~：https://mcflag.github.io [分享自Gank]</string>
-    <string name="github_issues">您好，很希望得到您的意见，由于没有线上反馈系统，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我，我将根据情况尽量处理哦 ~</string>
-
-
-    <!--url-->
-    <string name="string_url_gank">https://github.com</string>
-    <string name="string_url_other">https://github.com/mcflag</string>
-    <!--fir.im-->
-    <string name="string_url_new_version">https://www.ccooy.com</string>
-    <!--issues-->
-    <string name="string_url_issues">https://github.com</string>
-    <!--blog-->
-    <string name="string_url_blog">http://mcflag.github.io</string>
-    <string name="string_url_gankio">http://gank.io/api</string>
     <string name="xiandu_main_tab">主分类</string>
     <string name="xiandu_sub_tab">子分类</string>
 
