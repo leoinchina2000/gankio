@@ -203,6 +203,7 @@ class ToolScanner(private var mOnScanSuccessListener: OnScanSuccessListener?) {
         mHandler.removeCallbacks(mScanningDeployFishedRunnable)
         mHandler.removeCallbacks(mScanningFishedRunnable)
         mHandler.removeCallbacks(mScanningStartRunnable)
+        mHandler.removeCallbacks(mScanningDeployRunnable)
         mOnScanSuccessListener = null
     }
 
