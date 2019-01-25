@@ -20,4 +20,6 @@ object GlobalConfig {
     const val CATEGORY_NAME_RECOMMEND = "瞎推荐"
     const val CATEGORY_NAME_RESOURCE = "拓展资源"
     const val CATEGORY_NAME_FULI = "福利"
+
+    const val FRONT_SP = "front_sp"
 }

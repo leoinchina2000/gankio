@@ -20,17 +20,22 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <!-- 闪屏页 -->
-        <activity
-                android:name=".module.splash.SplashActivity"
-                android:launchMode="singleTop"
-                android:screenOrientation="portrait">
-
+        <!-- 测试页 -->
+        <activity android:name=".module.test.TestDaggerActivity"
+                  android:launchMode="singleTop"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <!-- 闪屏页 -->
+        <activity
+                android:name=".module.splash.SplashActivity"
+                android:launchMode="singleTop"
+                android:screenOrientation="portrait">
         </activity>
 
         <!-- 主页面 -->
@@ -60,7 +65,7 @@
                 android:screenOrientation="portrait">
         </activity>
 
-        <meta-data android:name="android.max_aspect" android:value="2.1" />
+        <meta-data android:name="android.max_aspect" android:value="2.1"/>
 
     </application>
 
